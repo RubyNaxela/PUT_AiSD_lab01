@@ -8,12 +8,12 @@ namespace sorts {
 
     void selection_sort(int* tab, int n) {
         for (int i = 0; i < n - 1; i++) {
-            int tempMin = tab[i];
+            int temp_min = tab[i];
             int index = i;
             for (int j = i + 1; j < n; j++) {
-                if (tab[j] < tab[i] and tab[j] < tempMin) {
+                if (tab[j] < tab[i] && tab[j] < temp_min) {
                     index = j;
-                    tempMin = tab[j];
+                    temp_min = tab[j];
                 }
             }
             std::swap(tab[i], tab[index]);
@@ -37,13 +37,11 @@ namespace sorts {
     }
 
     void insertion_sort(int* tab, int n) {
-        for (int keyIndex = 1; keyIndex < n; keyIndex++) {
-            int key = tab[keyIndex];
-            int j = keyIndex - 1;
-            while (key < tab[j] && j >= 0) {
+        for (int key_index = 1; key_index < n; key_index++) {
+            int key = tab[key_index];
+            int j;
+            for (j = key_index - 1; key < tab[j] && j >= 0; j--)
                 std::swap(tab[j + 1], tab[j]);
-                j--;
-            }
             tab[j + 1] = key;
         }
     }

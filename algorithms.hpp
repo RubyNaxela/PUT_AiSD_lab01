@@ -82,7 +82,29 @@ namespace sorts {
         quick_sort(tab, 0, n - 1);
     }
 
+    int __interval(int n, int k) {
+        int div = 1;
+        for (int i = 0; i < (k + 2); i++) div *= 3;
+        for (int h = 1;; h = 3 * h + 1) if (h >= n) return h / div;
+    }
+
     void shell_sort(int* tab, int n) {
+        int h = 1;
+        for (int k = 0; h > 0; k++) {
+            h = __interval(n, k);
+            for (int j = n - h - 1; j >= 0; j--) {
+                int x = tab[j];
+                int i = j + h;
+                while (i < n && x > tab[i]) {
+                    tab[i - h] = tab[i];
+                    i += h;
+                }
+                tab[i - h] = x;
+            }
+        }
+    }
+
+    void shell_sort2(int* tab, int n) {
         // Wyznaczanie wartosci poczatkowego przesuniecia
         int h;
         for (h = 1; h < n; h = 3 * h + 1);
